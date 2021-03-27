@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {MobileAppHeaders}
+        <meta charset="utf-8">
+        <title>{Title}{block:TagPage} ({lang:Posts tagged Tag}){/block:TagPage}{block:SearchPage} ({lang:Search results for SearchQuery}){/block:SearchPage}{block:PermalinkPage}{block:PostSummary} — {PostSummary}{/block:PostSummary}{/block:PermalinkPage}</title>
+        <meta name="description" content="{MetaDescription}">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="theme-color" content="#35465D">
+        <link rel="shortcut icon" href="{Favicon}">
+        <link rel="apple-touch-icon-precomposed" href="{PortraitURL-128}">
+        <link rel="alternate" type="application/rss+xml" href="{RSS}">
+        {PostTypographyStyles}
+
+        <style>
+            html {
+                font-family: Helvetica, Arial, sans-serif;
+                font-size: 16px;
+            }
+            body {
+                width: 700px;
+                margin-left: auto;
+                margin-right: auto;
+                font-size: 1rem;
+            }
+            body > header, body > footer {
+                text-align: center;
+            }
+            body > header, body > main, body > footer, body > header > nav, body > main > article {
+                margin-top: 2rem;
+                margin-bottom: 2rem;
+            }
+            body > main > section > ol {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+            }
+            body > main > section > ol > li > a > img {
+                margin-right: .5em;
+            }
+            nav {
+                display: flex;
+                flex-align: stretch;
+            }
+            nav > div {
+                flex-grow: 1;
+                text-align: center;
+            }
+            h1, h2, h3, h4, h5, h6, p {
+                margin-top: 1em;
+                margin-bottom: 1em;
+            }
+            h1 {
+                font-size: 2.25rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            h3 {
+                font-size: 1.75rem;
+            }
+            h4 {
+                font-size: 1.5rem;
+            }
+            h5 {
+                font-size: 1.25rem;
+            }
+            h6 {
+                font-size: 1rem;
+            }
+            footer {
+                color: gray;
+            }
+            footer a {
+                color: inherit;
+            }
+            figure {
+                margin: 0;
+            }
+            a {
+                color: blue;
+            }
+            img {
+                height: auto;
+                max-width: 100%;
+            }
+            {CustomCSS}
+        </style>
+    </head>
+    <body class="layout-{select:Layout}">
+        <header>
+            {block:ShowAvatar}
+            <img class="avatar-shape-{select:Avatar shape}" src="{PortraitURL-128}">
+            {/block:ShowAvatar}
+            {block:ShowTitle}
+            <h1>{Title}</h1>
+            {/block:ShowTitle}
+            {block:ShowDescription}
+            <p>{Description}</p>
+            {/block:ShowDescription}
+            <nav>
+                <div><a href="{BlogURL}">{lang:Home}</a></div>
+                {block:HasPages}
+                {block:Pages}
+                <div><a href="{URL}">{Label}</a></div>
+                {/block:Pages}
+                {/block:HasPages}
+                {block:AskEnabled}
+                <div><a href="/ask">{AskLabel}</a></div>
+                {/block:AskEnabled}
+                {block:SubmissionsEnabled}
+                <div><a href="/submit">{SubmitLabel}</a></div>
+                {/block:SubmissionsEnabled}
+                <div><a href="/archive">{lang:Archive}</a></div>
+            </nav>
+        </header>
+        <form style="position:fixed;top:4rem;right:1rem" action="/search" method="get">
+            <input type="text" name="q" value="{SearchQuery}">
+            <input type="submit" value="Search">
+        </form>
+        <main>
+            {block:DayPage}
+            <header>
+                <h2>{lang:Posted on DayOfMonth Month Year}</h2>
+            </header>
+            {/block:DayPage}
+            {block:TagPage}
+            <header>
+                <h2>{lang:Posts tagged Tag}</h2>
+            </header>
+            {/block:TagPage}
+            {block:SearchPage}
+            <header>
+                <h2>{lang:Search results for SearchQuery}</h2>
+            </header>
+            {/block:SearchPage}
+            {block:Posts}
+            <article class="post-type-{PostType}">
+                {block:Text}
+                {block:Title}
+                <header>
+                    <h3>{Title}</h3>
+                </header>
+                {/block:Title}
+                {block:NotReblog}
+                {Body}
+                {/block:NotReblog}
+                {/block:Text}
+                {block:Photo}
+                <figure>
+                    {LinkOpenTag}<img src="{PhotoURL-HighRes}">{LinkCloseTag}
+                    {block:NotReblog}
+                    {block:Caption}
+                    <figcaption>{Caption}</figcaption>
+                    {/block:Caption}
+                    {/block:NotReblog}
+                </figure>
+                {/block:Photo}
+                {block:Photoset}
+                <figure>
+                    {Photoset}
+                    {block:NotReblog}
+                    {block:Caption}
+                    <figcaption>{Caption}</figcaption>
+                    {/block:Caption}
+                    {/block:NotReblog}
+                </figure>
+                {/block:Photoset}
+                {block:Quote}
+                <blockquote>
+                    <p>{Quote}</p>
+                    {block:Source}
+                    <p>—{Source}</p>
+                    {/block:Source}
+                </blockquote>
+                {/block:Quote}
+                {block:Link}
+                <header>
+                    <h3><a href="{URL}" {Target}>{Name}</a></h3>
+                </header>
+                {block:NotReblog}
+                {block:Description}
+                {Description}
+                {/block:Description}
+                {/block:NotReblog}
+                {/block:Link}
+                {block:Chat}
+                {block:Title}
+                <header>
+                    <h3>{Title}</h3>
+                </header>
+                {/block:Title}
+                {block:Lines}
+                <p>{block:Label}<b>{Label}</b>{/block:Label} {Line}</p>
+                {/block:Lines}
+                {/block:Chat}
+                {block:Audio}
+                <figure>
+                    {block:AudioEmbed}
+                    {AudioEmbed}
+                    {/block:AudioEmbed}
+                    {block:NotReblog}
+                    {block:Caption}
+                    <figcaption>{Caption}</figcaption>
+                    {/block:Caption}
+                    {/block:NotReblog}
+                </figure>
+                {/block:Audio}
+                {block:Video}
+                <figure>
+                    {block:IfNotWideLayout}
+                    {Video-500}
+                    {/block:IfNotWideLayout}
+                    {block:IfWideLayout}
+                    {Video-700}
+                    {/block:IfWideLayout}
+                    {block:NotReblog}
+                    {block:Caption}
+                    <figcaption>{Caption}</figcaption>
+                    {/block:Caption}
+                    {/block:NotReblog}
+                </figure>
+                {/block:Video}
+                {block:Answer}
+                <h6>{Asker} asked:</h6>
+                <blockquote>{Question}</blockquote>
+                {block:Answerer}
+                    <h6>{Answerer} answered:</h6>
+                    {Answer}
+                {/block:Answerer}
+                {block:NotReblog}
+                {Replies}
+                {/block:NotReblog}
+                {/block:Answer}
+                {block:RebloggedFrom}
+                {block:Reblogs}
+                <h6><a href="{Permalink}">{Username}</a></h6>
+                {Body}
+                {/block:Reblogs}
+                {/block:RebloggedFrom}
+                {block:Date}
+                <footer>
+                    {block:ContentSource}
+                    <p>Source: <a href="{SourceURL}">{SourceTitle}</a></p>
+                    {/block:ContentSource}
+                    {block:HasTags}
+                    <p>
+                        {block:Tags}
+                        <a href="{TagURL}">#{Tag}</a>
+                        {/block:Tags}
+                    </p>
+                    {/block:HasTags}
+                    <p><a href="{Permalink}">{lang:Posted TimeAgo with NoteCount notes}</a></p>
+                </footer>
+                {/block:Date}
+            </article>
+            <hr>
+            {/block:Posts}
+            {block:PostNotes}
+            <section>
+                <h4>{lang:Notes}</h4>
+                {PostNotes}
+            </section>
+            {/block:PostNotes}
+        </main>
+        {block:Pagination}
+        <nav>
+            {block:NextPage}
+            <div><a href="{NextPage}">{lang:Older posts}</a></div>
+            {/block:NextPage}
+            {block:PreviousPage}
+            <div><a href="{PreviousPage}">{lang:Newer posts}</a></div>
+            {/block:PreviousPage}
+        </nav>
+        {/block:Pagination}
+        {block:PermalinkPagination}
+        <nav>
+            {block:PreviousPost}
+            <div><a href="{PreviousPost}">{lang:Previous post}</a></div>
+            {/block:PreviousPost}
+            {block:NextPost}
+            <div><a href="{NextPost}">{lang:Next post}</a></div>
+            {/block:NextPost}
+        </nav>
+        {/block:PermalinkPagination}
+        {block:DayPagination}
+        <nav>
+            {block:PreviousDayPage}
+            <div><a href="{PreviousDayPage}">{lang:Previous day}</a></div>
+            {/block:PreviousDayPage}
+            {block:NextDayPage}
+            <div><a href="{NextDayPage}">{lang:Next day}</a></div>
+            {/block:NextDayPage}
+        </nav>
+        {/block:DayPagination}
+        <footer><a href="https://github.com/2yr434hgd7fy384/old-web">Old Web</a> theme by <a href="https://2yr434hgd7fy384.tumblr.com">2yr</a></footer>
+    </body>
+</html>
