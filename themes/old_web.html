@@ -266,12 +266,12 @@
         </main>
         {block:Pagination}
         <nav>
-            {block:NextPage}
-            <div><a href="{NextPage}">{lang:Older posts}</a></div>
-            {/block:NextPage}
             {block:PreviousPage}
             <div><a href="{PreviousPage}">{lang:Newer posts}</a></div>
             {/block:PreviousPage}
+            {block:NextPage}
+            <div><a href="{NextPage}">{lang:Older posts}</a></div>
+            {/block:NextPage}
         </nav>
         {/block:Pagination}
         {block:PermalinkPagination}
