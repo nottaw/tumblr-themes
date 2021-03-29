@@ -88,10 +88,10 @@
             {CustomCSS}
         </style>
     </head>
-    <body class="layout-{select:Layout}">
+    <body>
         <header>
             {block:ShowAvatar}
-            <img class="avatar-shape-{select:Avatar shape}" src="{PortraitURL-128}">
+            <img src="{PortraitURL-128}">
             {/block:ShowAvatar}
             {block:ShowTitle}
             <h1>{Title}</h1>
@@ -136,7 +136,7 @@
             </header>
             {/block:SearchPage}
             {block:Posts}
-            <article class="post-type-{PostType}">
+            <article>
                 {block:Text}
                 {block:Title}
                 <header>
